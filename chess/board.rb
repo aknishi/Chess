@@ -19,15 +19,33 @@ class Board
   def reset_board
     grid.each_with_index do |line, row|
       line.each_index do |col|
-        if row == 1
-          grid[row][col] = King.new(:white, self, [row,col])
+        if row == 0
+          generate_piece_order(row, :white)
+        elsif row == 7
+          generate_piece_order(row, :black)
+        elsif row == 1
+          grid[row][col] = Pawn.new(:white, self, [row,col])
         elsif row == 6
-          grid[row][col] = Bishop.new(:black, self, [row,col])
-        elsif row == 2 && col == 2
-          grid[row][col] = Knight.new(:black, self, [row,col])
+          grid[row][col] = Pawn.new(:black, self, [row,col])
         else
           grid[row][col] = NullPiece.new([row, col])
         end
+      end
+    end
+  end
+
+  def generate_piece_order(row, color)
+    (0..7).to_a.each do |col|
+      if col == 0 || col == 7
+        grid[row][col] = Rook.new(color, self, [row, col])
+      elsif col == 1 || col == 6
+        grid[row][col] = Knight.new(color, self, [row, col])
+      elsif col == 2 || col == 5
+        grid[row][col] = Bishop.new(color, self, [row, col])
+      elsif col == 3
+        grid[row][col] = Queen.new(color, self, [row, col])
+      else
+        grid[row][col] = King.new(color, self, [row, col])
       end
     end
   end
