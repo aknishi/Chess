@@ -76,15 +76,28 @@ class Cursor
   end
 
   def handle_key(key)
-    movement = MOVES[key]
-    new_pos = cursor_pos[0] + movement[0], cursor_pos[1] + movement[1]
-    update_pos(new_pos) if valid_pos?
+    case key
+    when :return || :space
+      cursor_pos
+      
+    when :ctrl_c
+      Process.exit(0)
+      
+    when :left || :right || :up || :down
+      difference = MOVES[key]
+      new_pos = cursor_pos[0] + difference[0], cursor_pos[1] + difference[1]
+      update_pos(new_pos) if valid_pos?(new_pos)
+      nil
+    end
+    
   end
   
   def valid_pos?(pos)
     pos.all? {|i| i < 8 && i >= 0}
   end
 
+  private 
+  
   def update_pos(new_pos)
     @cursor_pos = new_pos
   end
