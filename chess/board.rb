@@ -20,9 +20,11 @@ class Board
     grid.each_with_index do |line, row|
       line.each_index do |col|
         if row == 1
-          grid[row][col] = Queen.new(:white, self, [row,col])
+          grid[row][col] = King.new(:white, self, [row,col])
         elsif row == 6
           grid[row][col] = Bishop.new(:black, self, [row,col])
+        elsif row == 2 && col == 2
+          grid[row][col] = Knight.new(:black, self, [row,col])
         else
           grid[row][col] = NullPiece.new([row, col])
         end

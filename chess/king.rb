@@ -15,7 +15,7 @@ class King < Piece
   end
 
   def update_moves
-    p @moves = get_moves(:horizontal) + get_moves(:diagonal)
+    p @moves = get_moves(:king)
   end
 
 end

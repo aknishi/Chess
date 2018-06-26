@@ -86,6 +86,7 @@ end
 module  SteppingPiece
   KING_DIRS = [[0,-1],[0,1],[-1,0],[1,0],[1,1],[1,-1],[-1,1],[-1,-1]]
   KNIGHT_MOVEMENT = [[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,-2],[-1,2]]
+
   def get_moves(piece)
     if piece == :knight
       @moves = generate_knight_moves(position)
@@ -98,7 +99,12 @@ module  SteppingPiece
   private
 
   def generate_knight_moves(position)
-
+    result = []
+    KNIGHT_MOVEMENT.each do |dir|
+      new_pos = dir[0] + position[0], dir[1] + position[1]
+      result << new_pos if valid_move?(new_pos)
+    end
+    result
   end
 
   def generate_king_moves(position)
@@ -107,6 +113,7 @@ module  SteppingPiece
       new_pos = dir[0] + position[0], dir[1] + position[1]
       result << new_pos if valid_move?(new_pos)
     end
+    result
   end
 
   def valid_move?(pos)
@@ -115,8 +122,7 @@ module  SteppingPiece
       if @board[pos].color == self.color
         return false
       else
-        @found_opposite = true
-        return false
+        return true
       end
     end
     true
