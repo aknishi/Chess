@@ -77,7 +77,7 @@ class Cursor
   def handle_key(key)
     case key
     when :return, :space
-      cursor_pos
+      @board[cursor_pos].update_moves unless @board[cursor_pos].is_a?(NullPiece)
 
     when :ctrl_c
       Process.exit(0)

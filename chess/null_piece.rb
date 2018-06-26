@@ -1,18 +1,11 @@
 
 class NullPiece
 
-  attr_reader :value
+  attr_reader :type
 
   def initialize(pos)
     @position = pos
-    @value = " "
+    @type = " "
   end
 
-  def inspect
-    print " "
-  end
-
-  def to_s
-    print " "
-  end
 end

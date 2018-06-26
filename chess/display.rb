@@ -12,7 +12,7 @@ class Display
 
   def play
     loop do
-      system("clear")
+      # system("clear")
       render
       cursor.get_input
     end
