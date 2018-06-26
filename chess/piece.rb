@@ -5,7 +5,7 @@ class Piece
   
   def initialize(loc)
     @location = loc
-    @value = "P"
+    @value = "♕"
   end
   
   def inspect
