@@ -16,7 +16,7 @@ class Piece
   end
 
   def valid_move?(pos)
-    true
+    @moves.any? {|valid_pos| valid_pos == pos}
   end
 
 end
