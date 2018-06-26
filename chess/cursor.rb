@@ -24,10 +24,10 @@ KEYMAP = {
 }
 
 MOVES = {
-  left: [0, -1],
-  right: [0, 1],
-  up: [-1, 0],
-  down: [1, 0]
+  :left => [0, -1],
+  :right => [0, 1],
+  :up => [-1, 0],
+  :down => [1, 0]
 }
 
 class Cursor
@@ -71,33 +71,33 @@ class Cursor
 
     STDIN.echo = true # the console prints return values again
     STDIN.cooked! # the opposite of raw mode :)
-
     return input
   end
 
   def handle_key(key)
     case key
-    when :return || :space
+    when :return, :space
       cursor_pos
-      
+
     when :ctrl_c
       Process.exit(0)
-      
-    when :left || :right || :up || :down
+
+    when :left, :right, :up, :down
+      MOVES[key]
       difference = MOVES[key]
       new_pos = cursor_pos[0] + difference[0], cursor_pos[1] + difference[1]
       update_pos(new_pos) if valid_pos?(new_pos)
       nil
     end
-    
+
   end
-  
+
   def valid_pos?(pos)
     pos.all? {|i| i < 8 && i >= 0}
   end
 
-  private 
-  
+  private
+
   def update_pos(new_pos)
     @cursor_pos = new_pos
   end

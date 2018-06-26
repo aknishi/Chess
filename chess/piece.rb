@@ -1,22 +1,26 @@
-
+require_relative 'board'
 class Piece
-  
-  attr_reader :value
-  
-  def initialize(loc)
-    @location = loc
-    @value = "♕"
+
+  attr_reader :type
+
+  def initialize(pos)
+    @position = pos
+    @type = "♘"
+    @moves = []
   end
-  
-  def inspect
-    print "P"
-  end
-  
+
   def valid_move?(pos)
-    true    
+    true
   end
-  
-  def to_s
-    print "p"
-  end
+
+end
+
+
+module SlidingPiece
+
+end
+
+module  SteppingPiece
+
+
 end
