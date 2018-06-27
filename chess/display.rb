@@ -10,14 +10,6 @@ class Display
     @cursor = cursor
   end
 
-  def play
-    loop do
-      # system("clear")
-      render
-      cursor.get_input
-    end
-  end
-
   def render
     puts "---------------------------------"
     board.grid.each_with_index do |line, row|
@@ -35,15 +27,4 @@ class Display
     end
   end
   #ctrl-cmd-space emojis 👌🏾
-end
-
-
-if $PROGRAM_NAME == __FILE__
-  board = Board.new
-  cursor = Cursor.new([0,0], board)
-  board.reset_board
-  display = Display.new(board, cursor)
-
-  display.render
-  display.play
 end

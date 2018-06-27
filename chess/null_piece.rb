@@ -8,4 +8,8 @@ class NullPiece
     @type = " "
   end
 
+  def update_moves
+  end
+
+
 end

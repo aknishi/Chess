@@ -37,6 +37,7 @@ class Cursor
   def initialize(cursor_pos, board)
     @cursor_pos = cursor_pos
     @board = board
+    @first_enter = true
   end
 
   def get_input
@@ -77,8 +78,8 @@ class Cursor
   def handle_key(key)
     case key
     when :return, :space
-      @board[cursor_pos].update_moves unless @board[cursor_pos].is_a?(NullPiece)
-
+      @board[cursor_pos].update_moves
+      return cursor_pos
     when :ctrl_c
       Process.exit(0)
 
@@ -87,10 +88,20 @@ class Cursor
       difference = MOVES[key]
       new_pos = cursor_pos[0] + difference[0], cursor_pos[1] + difference[1]
       update_pos(new_pos) if valid_pos?(new_pos)
-      nil
     end
 
   end
+
+  # def get_next_input(start_pos)
+  #
+  #   puts "select where you want to move it"
+  #   key = KEYMAP[read_char]
+  #   handle_key(key)
+  #
+  #   #get second input
+  #   end_pos = cursor_pos
+  #   @board.move_piece(start_pos, end_pos)
+  # end
 
   def valid_pos?(pos)
     pos.all? {|i| i < 8 && i >= 0}
